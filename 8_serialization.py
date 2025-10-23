@@ -8,7 +8,7 @@ class Address(BaseModel):
 class Patient(BaseModel):
     name : str
     age : int
-    gender : str
+    gender : str = 'Male'
     address : Address
 
 
@@ -26,14 +26,14 @@ address_dict = {'city' : 'Pune', 'state' : 'Maharashtra', 'pin' : '413801'}
 
 address1 = Address(**address_dict)
 
-patient_dict = {'name' : 'Rahul', 'age' : 35, 'gender' : 'Male', 'address' : address1}
+patient_dict = {'name' : 'Rahul', 'age' : 35, 'address' : address1}
 
 patient1 = Patient(**patient_dict)
 
 
 # temp = patient1.model_dump(include = ['name', 'address'])
 
-temp = patient1.model_dump(exclude = {'address' : ['state']})
+temp = patient1.model_dump(exclude = {'address' : ['state']}, exclude_unset = True)
 
 print(temp)
 print(type(temp))
